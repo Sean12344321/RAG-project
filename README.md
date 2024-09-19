@@ -25,7 +25,7 @@ This project implements a Retrieval-Augmented Generation (RAG) model using the C
 1. Clone the repository:
    ```bash
    git clone https://github.com/Sean12344321/RAG-project.git
-   cd rag-cohere-project
+   cd RAG-project
    ```
 2. Install dependencies using Poetry:
    ```bash
