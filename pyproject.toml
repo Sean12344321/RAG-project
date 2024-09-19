@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "RAG"
+version = "0.1.0"
+description = ""
+authors = ["Sean12344321 <Sean930110@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pypdf2 = "^3.0.1"
+requests = "^2.32.3"
+langchain = "^0.3.0"
+chromadb = "^0.5.5"
+sentence-transformers = "^3.1.0"
+faiss-cpu = "^1.8.0.post1"
+transformers = "^4.44.2"
+cohere = "^5.9.2"
+python-dotenv = "^1.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
