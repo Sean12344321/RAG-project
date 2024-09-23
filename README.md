@@ -39,7 +39,7 @@ Once the dependencies are installed, follow these steps:
 1. Navigate to the `src` directory:
 
    ```bash
-   cd src
+   cd rag/src
    ```
 
 2. Run the generator module:
