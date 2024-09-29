@@ -1,17 +1,12 @@
-import cohere
-import os 
-from dotenv import load_dotenv
-
-load_dotenv()
-co = cohere.Client(os.getenv('COHERE_API_KEY'))
+import ollama
 
 while True:
-	question = input('Ask a question (or type "exit" to quit): ')
-	if question.lower() == 'exit':
-		break
-	question += 'please response long as possible'
-	response = co.chat(
-		message=question,
-		max_tokens=4000, 
-	)
-	print(response.text)
+    user_input = input("Type anything (or exit to leave): ")
+    if user_input.lower() == "exit":
+        break
+    user_input += ' please respond as long as possible'
+    response = ollama.chat(model='gemma2:2b', messages=[{
+        'role': 'user',
+        'content': user_input,
+    }])
+    print("AI: " + response['message']['content'])

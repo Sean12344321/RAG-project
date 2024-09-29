@@ -1,20 +1,26 @@
 from retriever import retrieve
-from dotenv import load_dotenv
-import cohere
-import os 
+import ollama
 
-load_dotenv()
-qa_model = cohere.Client(os.getenv('COHERE_API_KEY'))
+# Initialize the Ollama client
+ollama_client = ollama.Client()
 
 def generate_response(question, top_k):
+    # Retrieve relevant documents using your retriever function
     retrieved_documents, distances = retrieve(question, top_k=top_k)
 
-    response  = qa_model.chat(
-        message=question, 
-        documents=retrieved_documents,
-        max_tokens=4000, 
+    # Create a message that includes the retrieved documents for context
+    context_message = "\n".join([doc['snippet'] for doc in retrieved_documents])
+    full_message = f"Context: {context_message}\nUser Question: {question}"
+
+    # Send the combined message to the model
+    response = ollama_client.chat(
+        model='gemma2:2b',
+        messages=[
+            {'role': 'system', 'content': "Use the provided context to answer the question."},
+            {'role': 'user', 'content': full_message}
+        ]
     )
-    return [response.text, retrieved_documents, distances]
+    return [response['message']['content'], retrieved_documents, distances]
 
 def show_both(question):
     question += ' please respond with a long explanation'
